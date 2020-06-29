@@ -1,5 +1,5 @@
 {
-  "name": "codersrank-analyser",
+  "name": "codersrank-analyzer",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -12,12 +12,21 @@
   "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^18.0.0",
+    "bcrypt": "^5.0.0",
+    "commander": "^5.1.0",
     "dotenv": "^8.2.0",
+    "luxon": "^1.24.1",
+    "md5": "^2.2.1",
+    "nodegit": "^0.26.5",
     "tmp": "^0.2.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
   "devDependencies": {
-    "@types/tmp": "^0.2.0"
+    "@types/bcrypt": "^3.0.0",
+    "@types/luxon": "^1.24.1",
+    "@types/nodegit": "^0.26.5",
+    "@types/tmp": "^0.2.0",
+    "rimraf": "^3.0.2"
   }
 }

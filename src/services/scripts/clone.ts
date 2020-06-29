@@ -1,7 +1,7 @@
 import * as path from 'path'
 
-import { Repo } from '../models/repo'
-import { run } from './cmd'
+import { Repo } from '../../models/repo'
+import { run } from '../cmd'
 
 export const clone = async (repo: Repo, target: string) => {
   const { ssh_url: url, name } = repo
@@ -10,14 +10,11 @@ export const clone = async (repo: Repo, target: string) => {
 
   await run(`git clone ${url} ${targetDir}`)
 
-  const lsr = await run(`dir ${targetDir}`)
+  // TODO: @brunolm remove temp
+  // const lsr = await run(`dir ${targetDir}`)
 
-  console.log('targetDir', targetDir)
-  console.log('lsr', lsr)
+  // console.log('targetDir', targetDir)
+  // console.log('lsr', lsr)
 
   return targetDir
-}
-
-export const getBranches = async (repoDir: string) => {
-  console.log('getBranches', repoDir)
 }
