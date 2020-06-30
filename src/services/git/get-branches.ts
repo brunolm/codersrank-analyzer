@@ -2,7 +2,7 @@ import { Reference, Repository } from 'nodegit'
 
 export const getBranches = async (nodegitRepo: Repository) => {
   const refs = await nodegitRepo.getReferences()
-
+  
   const branchesRemoteFirst = [...refs.filter((ref) => ref.isRemote()), ...refs.filter((ref) => !ref.isRemote())]
 
   return branchesRemoteFirst.reduce((uniqueReferences, reference) => {

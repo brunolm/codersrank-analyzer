@@ -10,11 +10,5 @@ export const clone = async (repo: Repo, target: string) => {
 
   await run(`git clone ${url} ${targetDir}`)
 
-  // TODO: @brunolm remove temp
-  // const lsr = await run(`dir ${targetDir}`)
-
-  // console.log('targetDir', targetDir)
-  // console.log('lsr', lsr)
-
   return targetDir
 }

@@ -49,7 +49,5 @@ export const getCommits = async (nodegitRepo: Repository, emails: string[]) => {
     commit.isDuplicated = commit.isMerge && commit.parents.filter((parent) => commitHashes[parent]).length > 1
   }
 
-  console.log('commits', commits.length)
-
   return commits
 }
