@@ -1,16 +1,20 @@
 import { program } from 'commander'
-import * as fs from 'fs'
+import * as fs from 'fs-extra'
 import JSZip = require('jszip')
 import { dirSync } from 'tmp'
 
 import { analyze } from './services/analyze'
+import { upload } from './services/codersrank/upload'
 import { createChunk } from './services/create-chunk'
 import { getRepos } from './services/github'
 import { ProgramOptions } from './services/program-options'
 import { clone } from './services/scripts'
-import { upload } from './services/codersrank/upload'
 
-const start = async () => {
+export const start = async () => {
+  try {
+    await fs.mkdir('output')
+  } catch (err) {}
+
   program
     .version('1.0.0')
     .requiredOption('-e, --emails <emails>', 'List of emails separated by ,')
