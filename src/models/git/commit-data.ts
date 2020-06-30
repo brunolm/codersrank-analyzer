@@ -1,4 +1,4 @@
-import { Commit, Diff } from 'nodegit'
+import { Commit } from 'nodegit'
 
 export interface CommitData {
   commit: Commit
@@ -6,9 +6,14 @@ export interface CommitData {
   diffInfo: DiffInfo[]
   isMerge: boolean
   isDuplicated: boolean
+  libraries?: Libraries
 }
 
 export interface DiffInfo {
   filename: string
   stats: any
+}
+
+export interface Libraries {
+  [key: string]: string[]
 }

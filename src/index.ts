@@ -1,12 +1,13 @@
 import { program } from 'commander'
+import * as fs from 'fs'
+import JSZip = require('jszip')
 import { dirSync } from 'tmp'
 
 import { analyze } from './services/analyze'
+import { createChunk } from './services/create-chunk'
 import { getRepos } from './services/github'
 import { ProgramOptions } from './services/program-options'
 import { clone } from './services/scripts'
-
-import * as fs from 'fs'
 
 const start = async () => {
   program.version('1.0.0').requiredOption('-e, --emails <emails>', 'List of emails separated by ,')
@@ -17,43 +18,46 @@ const start = async () => {
     emails: program.emails.split(/\s*,\s*/),
   }
 
-  const dir = dirSync({ unsafeCleanup: true })
-
   try {
-    const result = await getRepos()
+    const allRepos = (await getRepos()).filter((repo) => /brunolm/i.test(repo.url))
 
-    const test = result.find((s) => s.name === 'aeboilerplate')
-    // const test = result.find((s) => s.name === 'dotfiles')
-    // const test = result.find((s) => s.name === 'codersrank-analyzer')
-    // const test = result.find((s) => s.name === 'full-stack-project')
-    // const test = result.find((s) => s.name === 'angular-how-to')
+    const chunks = createChunk(allRepos, 8)
 
-    // const test = result[101]
+    for (const chunk of chunks) {
+      await Promise.all(
+        chunk.map(async (repo) => {
+          try {
+            const dir = dirSync({ unsafeCleanup: true })
 
-    const cloned = await clone(test, dir.name)
+            const cloned = await clone(repo, dir.name)
+            const analysisResult = await analyze(cloned, options)
 
-    const analysisResult = await analyze(cloned, options)
+            const filename = `${repo.name.replace(/[\s]/g, '-')}.json`
+            const zip = new JSZip()
+            zip.file(filename, JSON.stringify(analysisResult, null, 4))
+            const data = await zip.generateAsync({ type: 'uint8array' })
+            fs.writeFileSync(`output/${filename}.zip`, data, 'binary')
 
-    fs.writeFileSync(`output/aeboilerplate.json`, JSON.stringify(analysisResult, null, 2))
-    // fs.writeFileSync(`output/codersrank-analyzer.json`, JSON.stringify(analysisResult, null, 2))
-    // fs.writeFileSync(`output/dotfiles.json`, JSON.stringify(analysisResult, null, 2))
-  } catch (err) {
-    console.log('error', err)
-  } finally {
-    try {
-      dir.removeCallback()
-    } catch (err) {
-      // console.log('ERROR, FAILED TO DELETE TEMP FOLDER', err)
+            dir.removeCallback()
+          } catch (err) {
+            console.log('err', err)
+
+            console.log('ERROR, FAILED TO DELETE TEMP FOLDER FOR', repo.name)
+          }
+        }),
+      )
     }
+  } catch (err) {
+    console.log('Catch all error', err)
   }
 }
 
 process.on('uncaughtException', (err) => {
-  console.error('ERROR: ', err)
+  console.error('uncaughtException: ', err)
 })
 
 process.on('unhandledRejection', (err) => {
-  console.error('ERROR: ', err)
+  console.error('unhandledRejection: ', err)
 })
 
 start()

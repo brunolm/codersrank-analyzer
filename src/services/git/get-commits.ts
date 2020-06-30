@@ -18,10 +18,6 @@ export const getCommits = async (nodegitRepo: Repository, emails: string[]) => {
 
     commitHashes[gitCommit.sha()] = true
 
-    if (!emails.some((email) => email.toLowerCase() === gitCommit.author().email().toLowerCase())) {
-      continue
-    }
-
     const parents = (await gitCommit.getParents(10000)).map((parent) => parent.sha())
     const [diff] = await gitCommit.getDiff()
     const patches = await diff.patches()
@@ -36,18 +32,24 @@ export const getCommits = async (nodegitRepo: Repository, emails: string[]) => {
     const isMerge = parents.length >= 2
     const isDuplicated = undefined
 
+    // TODO: maybe someday
+    const libraries = undefined
+
     commits.push({
       commit: gitCommit,
       parents,
       diffInfo,
       isMerge,
       isDuplicated,
+      ...({ libraries } || {}),
     })
   }
 
   for (const commit of commits) {
     commit.isDuplicated = commit.isMerge && commit.parents.filter((parent) => commitHashes[parent]).length > 1
   }
+
+  console.log('commits', commits.length)
 
   return commits
 }

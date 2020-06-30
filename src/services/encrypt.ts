@@ -1,14 +1,15 @@
-import { hashSync } from 'bcrypt'
+import * as md5 from 'md5'
 
 import { env } from '../config/env'
 
-import * as md5 from 'md5'
-
-export const encrypt = (str: string) => {
+export const encrypt = (str: string, useSalt = true) => {
   if (!env.encrypt) {
     return str
   }
 
-  return hashSync(`${str} ${env.salt}`, 3)
-  // return md5(`${str} ${env.salt}`)
+  if (useSalt) {
+    return md5(`${str}${env.salt}`)
+  }
+
+  return md5(str)
 }

@@ -6,6 +6,10 @@ export const env = {
   github: {
     token: process.env.GITHUB_TOKEN,
   },
-  salt: `${process.env.SALT} ${Date.now()}`,
+  codersRank: {
+    sessionId: process.env.SESSION_ID,
+  },
+
+  salt: `${process.env.SALT}`,
   encrypt: true,
 }

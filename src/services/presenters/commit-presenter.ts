@@ -11,8 +11,8 @@ export const commitPresenter = async (commiDatas: CommitData[]) => {
 
   for (const commiData of commiDatas) {
     commits.push({
-      authorName: encrypt(commiData.commit.author().name()),
-      authorEmail: encrypt(commiData.commit.author().email()),
+      authorName: encrypt(commiData.commit.author().name(), false),
+      authorEmail: encrypt(commiData.commit.author().email(), false),
       createdAt: DateTime.fromJSDate(commiData.commit.date()).toLocal().toFormat('yyyy-MM-dd HH:mm:ss ZZZ'),
       commitHash: commiData.commit.sha(),
       isMerge: commiData.isMerge,
