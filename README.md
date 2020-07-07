@@ -4,21 +4,27 @@ Does the same as [codersrank-org/repo_info_extractor](https://github.com/codersr
 
 ## Usage
 
-### Config
-
-#### Required
 ```powershell
+$env:SALT="Optional PJSalt"
 $env:GITHUB_TOKEN="token with repo permisson"
-# (bash) export GITHUB_TOKEN="token with repo permisson"
+npx @brunolm/codersrank-analyzer -e e1@e1.com e2@e2.com --public --upload
 ```
 
-#### Optional
+Bash
+```bash
+export SALT="Optional PJSalt"
+export GITHUB_TOKEN="token with repo permisson"
+npx @brunolm/codersrank-analyzer -e e1@e1.com e2@e2.com --public --upload
+```
+
+### Help
+
 ```powershell
-$env:SALT=PJSalt
-# (bash) export SALT=some salt for encryption
+npx @brunolm/codersrank-analyzer --help
 ```
 
-### Parameters
+Output
+
 ```
 Usage: index [options]
 
@@ -29,24 +35,4 @@ Options:
   --private              Include private repositories
   -u, --upload           WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)
   -h, --help             display help for command
-```
-
-### Run example
-```powershell
-npm start -- -e foo@bar.com,baz@foobar.com
-```
-
-----------
-
-# NOT YET AVAILABLE, PLANNING:
-
-### Run
-```powershell
-npx @brunolm/codersrank-analyzer --help
-```
-
-#### Example usage
-```powershell
-$env:GITHUB_TOKEN="token with repo permisson"
-npx @brunolm/codersrank-analyzer -e e1@e1.com e2@e2.com --public --upload
 ```
