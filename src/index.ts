@@ -35,6 +35,8 @@ export const start = async () => {
   try {
     const allRepos = await getRepos({ isPublic: program.public, isPrivate: program.private })
 
+    console.log('Found', allRepos.length, 'repos')
+
     const chunks = createChunk(allRepos, 8)
 
     for (const chunk of chunks) {
@@ -83,9 +85,14 @@ export const start = async () => {
         }),
       )
     }
+
+    console.log('Done parsing', allRepos.length, 'repos')
   } catch (err) {
     console.log('Catch all error', err)
   }
+
+  console.log('Done! Exiting!')
+  process.exit(0)
 }
 
 process.on('uncaughtException', (err) => {
