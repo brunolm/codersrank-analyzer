@@ -2,4 +2,4 @@
 
 require('ts-node').register()
 
-require('../src').start()
+require('../src')
