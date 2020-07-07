@@ -6,6 +6,7 @@ import { dirSync } from 'tmp'
 import { analyze } from './services/analyze'
 import { upload } from './services/codersrank/upload'
 import { createChunk } from './services/create-chunk'
+import { encrypt } from './services/encrypt'
 import { getRepos } from './services/github'
 import { ProgramOptions } from './services/program-options'
 import { clone } from './services/scripts'
@@ -40,14 +41,21 @@ export const start = async () => {
       await Promise.all(
         chunk.map(async (repo) => {
           try {
-            console.log(`${repo.name}: Starting to parse`)
+            console.log(`${repo.name}: Starting to parse ${repo.git_url}`)
 
             const dir = dirSync({ unsafeCleanup: true })
 
             const cloned = await clone(repo, dir.name)
             const analysisResult = await analyze(cloned, options)
 
-            const filename = `${repo.name.replace(/[\s]/g, '-')}.json`
+            if (!analysisResult) {
+              console.log(`-${repo.name}: Skipping repo with no user commits`)
+
+              return
+            }
+
+            const encryptedRepoName = encrypt(repo.name).toLowerCase()
+            const filename = `${encryptedRepoName.replace(/[\s]/g, '-')}.json`
             const outputZip = `output/${filename}.zip`
 
             const zip = new JSZip()

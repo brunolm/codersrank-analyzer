@@ -15,6 +15,10 @@ export const analyze = async (repoDir: string, options: ProgramOptions) => {
 
   const commits = await getCommits(nodegitRepository, options.emails)
 
+  if (!commits) {
+    return undefined
+  }
+
   return {
     repoName: encrypt(path.basename(repoDir)),
     localUsernames: options.emails.map((email) => `User -> ${email}`),

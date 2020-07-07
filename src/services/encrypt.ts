@@ -2,7 +2,7 @@ import * as md5 from 'md5'
 
 import { env } from '../config/env'
 
-export const encrypt = (str: string, useSalt = true) => {
+export const encrypt = (str: string, useSalt = true): string => {
   if (!env.encrypt) {
     return str
   }

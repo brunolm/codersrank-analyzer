@@ -8,6 +8,13 @@ export const getCommits = async (nodegitRepo: Repository, emails: string[]) => {
 
   const gitCommits = (await walker.getCommitsUntil((_) => true)) as Commit[]
 
+  const lcEmails = emails.map((e) => e.toLowerCase())
+  
+  // if user has no commits, ignore repo
+  if (!gitCommits.some((gc) => lcEmails.find(e => e === gc.author().email().toLowerCase()))) {
+    return undefined;
+  }
+
   const commitHashes = {}
   const commits: CommitData[] = []
 
