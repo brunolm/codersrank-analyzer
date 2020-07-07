@@ -7,14 +7,14 @@ Does the same as [codersrank-org/repo_info_extractor](https://github.com/codersr
 ```powershell
 $env:SALT="Optional PJSalt"
 $env:GITHUB_TOKEN="token with repo permisson"
-npx @brunolm/codersrank-analyzer -e e1@e1.com e2@e2.com --public --upload
+npx @brunolm/codersrank-analyzer -e e1@e1.com,e2@e2.com --public --upload
 ```
 
 Bash
 ```bash
 export SALT="Optional PJSalt"
 export GITHUB_TOKEN="token with repo permisson"
-npx @brunolm/codersrank-analyzer -e e1@e1.com e2@e2.com --public --upload
+npx @brunolm/codersrank-analyzer -e e1@e1.com,e2@e2.com --public --upload
 ```
 
 ### Help
