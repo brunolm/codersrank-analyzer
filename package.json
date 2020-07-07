@@ -1,12 +1,13 @@
 {
   "name": "@brunolm/codersrank-analyzer",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "prepublish": "tsc -p ."
   },
-  "bin": "bin/index.ts",
+  "bin": "dist/bin/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
