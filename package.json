@@ -8,7 +8,11 @@
     "prepublish": "tsc -p ."
   },
   "bin": "dist/bin/index.js",
-  "keywords": [],
+  "repository": {
+    "url": "git@github.com:brunolm/codersrank-analyzer.git",
+    "type": "git"
+  },
+  "keywords": ["codersrank", "github", "analyzer"],
   "author": "",
   "license": "ISC",
   "dependencies": {
