@@ -12,7 +12,11 @@
     "url": "git@github.com:brunolm/codersrank-analyzer.git",
     "type": "git"
   },
-  "keywords": ["codersrank", "github", "analyzer"],
+  "keywords": [
+    "codersrank",
+    "github",
+    "analyzer"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -37,6 +41,7 @@
     "@types/luxon": "^1.24.1",
     "@types/nodegit": "^0.26.5",
     "@types/tmp": "^0.2.0",
+    "chalk": "^4.1.1",
     "rimraf": "^3.0.2"
   }
 }

@@ -1,5 +1,4 @@
 import { Octokit } from '@octokit/rest'
-
 import { env } from '../config/env'
 import { Repo } from '../models/repo'
 
@@ -18,8 +17,7 @@ export const getRepos = async ({ isPublic, isPrivate }) => {
 
     if (isPublic && isPrivate) {
       visibility = 'all'
-    }
-    else if (isPublic) {
+    } else if (isPublic) {
       visibility = 'public'
     } else if (isPrivate) {
       visibility = 'private'

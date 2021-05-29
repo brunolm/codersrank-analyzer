@@ -3,10 +3,8 @@ export interface CommitPresenter {
   authorEmail: string
   createdAt: string
   commitHash: string
-  isMerge: boolean
-  parents: string[]
   changedFiles: ChangedFile[]
-  isDuplicated: boolean
+  libraries: any
 }
 
 export interface ChangedFile {

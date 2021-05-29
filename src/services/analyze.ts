@@ -1,5 +1,4 @@
 import * as path from 'path'
-
 import { encrypt } from './encrypt'
 import { getBranches, getCommits, getRemotes, getRepository } from './git'
 import { commitPresenter, remotePresenter } from './presenters'
@@ -20,14 +19,18 @@ export const analyze = async (repoDir: string, options: ProgramOptions) => {
   }
 
   return {
-    repoName: encrypt(path.basename(repoDir)),
+    header: {
+      repo: encrypt(path.basename(repoDir)),
+      emails: options.emails,
+      suggestedEmails: options.emails,
+    },
+    commits: await commitPresenter(commits),
+
     localUsernames: options.emails.map((email) => `User -> ${email}`),
     remotes: remotePresenter(remotes),
     primaryRemoteUrl: encrypt(remotes[0].url()),
     numberOfBranches,
     numberOfTags,
-
-    commits: await commitPresenter(commits),
 
     emails_v2: [],
   }
