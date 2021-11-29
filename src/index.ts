@@ -1,8 +1,9 @@
 import * as commander from 'commander'
 import * as fs from 'fs-extra'
 import { gitService } from './actions/git-service'
-import * as github from './services/github'
-import * as gitlab from './services/gitlab'
+import * as file from './services/providers/file'
+import * as github from './services/providers/github'
+import * as gitlab from './services/providers/gitlab'
 
 export const start = async () => {
   try {
@@ -30,6 +31,16 @@ export const start = async () => {
       'WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)',
     )
     .action(gitService.bind(this, gitlab))
+
+  commander
+    .command('file')
+    .requiredOption('-e, --emails <emails>', 'List of emails separated by ,')
+    .requiredOption('-p, --rootPath <rootPath>', 'Root path to look into for Git projects')
+    .option(
+      '-u, --upload',
+      'WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)',
+    )
+    .action(gitService.bind(this, file))
 
   await commander.parseAsync()
 }

@@ -1,4 +1,7 @@
-export interface Repo {
+export interface RepoOptions {
+  skipClone: boolean
+}
+export interface Repo extends RepoOptions {
   id: number
   node_id: string
   name: string

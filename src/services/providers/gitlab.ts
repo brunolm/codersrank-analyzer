@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { env } from '../config/env'
-import { Repo } from '../models/repo'
+import { env } from '../../config/env'
+import { Repo } from '../../models/repo'
 
 const gitlab = axios.create({
   baseURL: 'https://gitlab.com/api/v4',

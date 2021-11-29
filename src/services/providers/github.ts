@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/rest'
-import { env } from '../config/env'
-import { Repo } from '../models/repo'
+import { env } from '../../config/env'
+import { Repo } from '../../models/repo'
 
 const github = new Octokit({
   auth: env.github.token,

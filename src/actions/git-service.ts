@@ -16,7 +16,11 @@ export const gitService = async (service, program) => {
   }
 
   try {
-    const allRepos: Repo[] = await service.getRepos({ isPublic: program.public, isPrivate: program.private })
+    const allRepos: Repo[] = await service.getRepos({
+      isPublic: program.public,
+      isPrivate: program.private,
+      rootPath: program.rootPath,
+    })
 
     console.log('Found', allRepos.length, 'repos')
 
@@ -30,7 +34,7 @@ export const gitService = async (service, program) => {
 
             const dir = dirSync({ unsafeCleanup: true })
 
-            const cloned = await clone(repo, dir.name)
+            const cloned = repo.skipClone ? repo.ssh_url : await clone(repo, dir.name)
             const analysisResult = await analyze(cloned, options)
 
             if (!analysisResult) {
