@@ -31,3 +31,5 @@ output/
 !output/.gitkeep
 
 dist/
+
+yarn-error.log

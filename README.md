@@ -4,10 +4,12 @@ Does the same as [codersrank-org/repo_info_extractor](https://github.com/codersr
 
 ## Usage
 
+### Setup env options
+
 ```powershell
 $env:SALT="Optional PJSalt"
 $env:GITHUB_TOKEN="token with repo permisson https://github.com/settings/tokens"
-npx @brunolm/codersrank-analyzer -e "e1@e1.com,e2@e2.com" --private --upload
+$env:GITLAB_TOKEN="token with permissions https://gitlab.com/-/profile/personal_access_tokens"
 ```
 
 Bash
@@ -15,10 +17,18 @@ Bash
 ```bash
 export SALT="Optional PJSalt"
 export GITHUB_TOKEN="token with repo permisson https://github.com/settings/tokens"
-npx @brunolm/codersrank-analyzer -e "e1@e1.com,e2@e2.com" --private --upload
+export GITLAB_TOKEN="token with permissions https://gitlab.com/-/profile/personal_access_tokens"
 ```
 
-Generate a [personal access token here](https://github.com/settings/tokens).
+### Run
+
+```powershell
+# github
+npx @brunolm/codersrank-analyzer github -e "e1@e1.com,e2@e2.com" --private --upload
+
+# gitlab
+npx @brunolm/codersrank-analyzer gitlab -e "e1@e1.com,e2@e2.com" --private --upload
+```
 
 ### Help
 

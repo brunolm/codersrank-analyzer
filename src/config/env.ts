@@ -7,6 +7,10 @@ export const env = {
     token: process.env.GITHUB_TOKEN,
   },
 
+  gitlab: {
+    token: process.env.GITLAB_TOKEN,
+  },
+
   salt: `${process.env.SALT}`,
   encrypt: true,
 }
