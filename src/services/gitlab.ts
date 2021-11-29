@@ -1,32 +1,36 @@
-import { ProjectSchema } from '@gitbeaker/core/dist/types/types'
-import { Gitlab } from '@gitbeaker/node'
+import axios from 'axios'
 import { env } from '../config/env'
 import { Repo } from '../models/repo'
 
-const gitlab = new Gitlab({
-  token: env.gitlab.token,
+const gitlab = axios.create({
+  baseURL: 'https://gitlab.com/api/v4',
+  headers: {
+    authorization: `Bearer ${env.gitlab.token}`,
+  },
 })
 
 export const getRepos = async ({ isPublic, isPrivate }) => {
-  let response: ProjectSchema[]
+  let response
 
-  let repos: ProjectSchema[] = []
+  let repos = []
   let page = 1
 
   do {
-    response = await gitlab.Projects.all({
-      pagination: 'offset',
-      page,
-      perPage: 100,
-      visibility: isPrivate ? 'private' : 'public',
-      membership: true,
+    response = await gitlab.get('/projects', {
+      params: {
+        pagination: 'offset',
+        page,
+        perPage: 100,
+        visibility: isPrivate ? 'private' : 'public',
+        membership: true,
+      },
     })
 
-    if (!response.length) {
+    if (!response?.data?.length) {
       break
     }
 
-    repos.push(...response)
+    repos.push(...response.data)
 
     ++page
   } while (true)
