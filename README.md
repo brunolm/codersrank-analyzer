@@ -30,7 +30,7 @@ npx @brunolm/codersrank-analyzer github -e "e1@e1.com,e2@e2.com" --private --upl
 npx @brunolm/codersrank-analyzer gitlab -e "e1@e1.com,e2@e2.com" --private --upload
 
 # folder and subfolders on local file system
-npx @brunolm/codersrank-analyzer file -e "e1@e1.com,e2@e2.com" -p <ROOT_PATH>
+npx @brunolm/codersrank-analyzer file -e "e1@e1.com,e2@e2.com" -p <ROOT_PATH> --upload
 ```
 
 ### Help
