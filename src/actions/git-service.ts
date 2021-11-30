@@ -70,7 +70,9 @@ export const gitService = async (service, program) => {
               }
             }
 
-            dir.removeCallback()
+            if (!repo.skipClone) {
+              dir.removeCallback()
+            }
           } catch (err) {
             // console.log(chalk.redBright`err`, err)
             // console.log('ERROR, FAILED TO DELETE TEMP FOLDER FOR', repo.name)
