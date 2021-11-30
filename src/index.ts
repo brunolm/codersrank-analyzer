@@ -54,11 +54,11 @@ export const start = async () => {
 }
 
 process.on('uncaughtException', (err) => {
-  console.error('uncaughtException: \n', err)
+  // console.error('uncaughtException: \n', err)
 })
 
 process.on('unhandledRejection', (err) => {
-  console.error('unhandledRejection: \n', err)
+  // console.error('unhandledRejection: \n', err)
 })
 
 start()
