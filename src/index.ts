@@ -5,6 +5,14 @@ import * as file from './services/providers/file'
 import * as github from './services/providers/github'
 import * as gitlab from './services/providers/gitlab'
 
+const tryFn = (fn, ...args) => {
+  try {
+    return fn(...args)
+  } catch (err) {
+    // console.error('err', err)
+  }
+}
+
 export const start = async () => {
   try {
     await fs.mkdir('output')
@@ -19,7 +27,7 @@ export const start = async () => {
       '-u, --upload',
       'WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)',
     )
-    .action(gitService.bind(this, github))
+    .action((...args) => tryFn(gitService.bind(this, github), ...args))
 
   commander
     .command('gitlab')
@@ -30,7 +38,7 @@ export const start = async () => {
       '-u, --upload',
       'WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)',
     )
-    .action(gitService.bind(this, gitlab))
+    .action((...args) => tryFn(gitService.bind(this, gitlab), ...args))
 
   commander
     .command('file')
@@ -40,7 +48,7 @@ export const start = async () => {
       '-u, --upload',
       'WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)',
     )
-    .action(gitService.bind(this, file))
+    .action((...args) => tryFn(gitService.bind(this, file), ...args))
 
   await commander.parseAsync()
 }

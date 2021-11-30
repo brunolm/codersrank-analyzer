@@ -38,17 +38,3 @@ npx @brunolm/codersrank-analyzer file -e "e1@e1.com,e2@e2.com" -p <ROOT_PATH> --
 ```powershell
 npx @brunolm/codersrank-analyzer --help
 ```
-
-Output
-
-```
-Usage: index [options]
-
-Options:
-  -V, --version          output the version number
-  -e, --emails <emails>  List of emails separated by ,
-  --public               Include public repositories
-  --private              Include private repositories
-  -u, --upload           WARNING: Automatically opens tabs on your default browser (will open 1 for each repository)
-  -h, --help             display help for command
-```
