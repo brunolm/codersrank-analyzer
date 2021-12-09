@@ -9,6 +9,7 @@ export const env = {
 
   gitlab: {
     token: process.env.GITLAB_TOKEN,
+    base_url: process.env.BASE_GITLAB_API_URL,
   },
 
   salt: `${process.env.SALT}`,
