@@ -10,6 +10,7 @@ Does the same as [codersrank-org/repo_info_extractor](https://github.com/codersr
 $env:SALT="Optional PJSalt"
 $env:GITHUB_TOKEN="token with repo permisson https://github.com/settings/tokens"
 $env:GITLAB_TOKEN="token with permissions https://gitlab.com/-/profile/personal_access_tokens"
+$env:BASE_GITLAB_API_URL="url of the api endpoint for your gitlab instance: https://gitlab.mycompanyaddress.net/api/v4"
 ```
 
 Bash
