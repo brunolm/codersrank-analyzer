@@ -4,12 +4,15 @@ Does the same as [codersrank-org/repo_info_extractor](https://github.com/codersr
 
 ## Usage
 
+**REQUIRED**: Node v12 (does not work with most recent versions)
+
 ### Setup env options
 
 ```powershell
 $env:SALT="Optional PJSalt"
 $env:GITHUB_TOKEN="token with repo permisson https://github.com/settings/tokens"
 $env:GITLAB_TOKEN="token with permissions https://gitlab.com/-/profile/personal_access_tokens"
+$env:BASE_GITLAB_API_URL="defaults to public instance; url of self-hosted gitlab instance: https://gitlab.company.net/api/v4"
 ```
 
 Bash
@@ -18,6 +21,7 @@ Bash
 export SALT="Optional PJSalt"
 export GITHUB_TOKEN="token with repo permisson https://github.com/settings/tokens"
 export GITLAB_TOKEN="token with permissions https://gitlab.com/-/profile/personal_access_tokens"
+export BASE_GITLAB_API_URL="defaults to public instance; url of self-hosted gitlab instance: https://gitlab.company.net/api/v4"
 ```
 
 ### Run

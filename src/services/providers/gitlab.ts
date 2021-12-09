@@ -3,7 +3,7 @@ import { env } from '../../config/env'
 import { Repo } from '../../models/repo'
 
 const gitlab = axios.create({
-  baseURL: 'https://gitlab.com/api/v4',
+  baseURL: (env.gitlab.base_url || 'https://gitlab.com/api/v4'),
   headers: {
     authorization: `Bearer ${env.gitlab.token}`,
   },
